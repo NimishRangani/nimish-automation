@@ -393,9 +393,9 @@ function metrics(){
 function frame(now){
   requestAnimationFrame(frame);
   if(!gl||document.hidden) return;
-  var dt=Math.min((now-lastT)/1000,0.05); lastT=now;
+  var real=Math.min((now-lastT)/1000,0.5), dt=Math.min(real,0.05); lastT=now;
   var y=scrollY;
-  if(reduced) sy=y; else sy+=(y-sy)*Math.min(1,dt*8);
+  if(reduced) sy=y; else sy+=(y-sy)*(1-Math.exp(-real*9));
   var h=cl(sy/Math.max(sysTop,1),0,1), t=cl((sy-sysTop)/sysLen,0,1), u=t*3;
 
   // panels and dots (driven by the smoothed scroll so they stay in step with the camera)
