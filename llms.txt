@@ -1,6 +1,6 @@
-# Nimish Rangani Automation
+# AI Expert
 
-> AI automation services in Auckland, New Zealand. Nimish Rangani builds n8n and LLM workflows for outreach, content production and internal operations, and works remotely with clients elsewhere.
+> AI automation services in Auckland, New Zealand. AI Expert, run by Nimish Rangani, builds n8n and LLM workflows for outreach, content production and internal operations, and works remotely with clients elsewhere.
 
 ## About
 - Nimish Rangani is an AI automation engineer based in Auckland, New Zealand, with 7+ years in enterprise IT (Bosch, Seqirus, Sigma Healthcare).
