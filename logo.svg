@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 64" role="img" aria-label="AI Expert">
+<style>
+.leg{stroke:#0B7F86}.base,.junc{fill:#0B7F86}.apex{fill:#D9822B}.ai{fill:#0B7F86}.ex{fill:#13202A}
+@media (prefers-color-scheme: dark){.leg{stroke:#3FC6C1}.base,.junc{fill:#3FC6C1}.apex{fill:#F5C45E}.ai{fill:#3FC6C1}.ex{fill:#E6EEF2}}
+</style>
+<g fill="none" class="leg" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13,50 L32,13 L51,50"/><path d="M19.7,37 L44.3,37"/></g>
+<circle class="junc" cx="19.7" cy="37" r="3"/><circle class="junc" cx="44.3" cy="37" r="3"/>
+<circle class="base" cx="13" cy="50" r="5.6"/><circle class="base" cx="51" cy="50" r="5.6"/>
+<circle class="apex" cx="32" cy="13" r="6"/>
+<text x="76" y="46" font-family="'Bricolage Grotesque','Segoe UI',Arial,Helvetica,sans-serif" font-size="40" font-weight="700"><tspan class="ai">AI</tspan><tspan class="ex" dx="9">Expert</tspan></text>
+</svg>
