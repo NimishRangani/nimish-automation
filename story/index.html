@@ -59,7 +59,7 @@ nav.top .row{height:56px; display:flex; align-items:center; justify-content:spac
 
 section{position:relative; z-index:1}
 #hero{height:100vh; height:100svh; min-height:620px; display:flex; align-items:center}
-#hero::before,.pin::before{content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, rgba(6,9,12,.86) 0%, rgba(6,9,12,.5) 42%, rgba(6,9,12,0) 68%)}
+#hero::before,.pin::before{content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, rgba(6,9,12,.82) 0%, rgba(6,9,12,.35) 36%, rgba(6,9,12,0) 54%)}
 #hero .copy{position:relative; max-width:640px}
 h1{font:700 clamp(3.2rem, 9.5vw, 8rem)/.95 var(--font-display); letter-spacing:-.035em; margin:14px 0 22px}
 .grad{background:linear-gradient(100deg, var(--accent), var(--amber)); -webkit-background-clip:text; background-clip:text; color:transparent}
@@ -382,7 +382,7 @@ function buildGroup(c,gi){
 function metrics(){
   vh=innerHeight; W=innerWidth; H=innerHeight;
   sysTop=sys.offsetTop; sysLen=Math.max(sys.offsetHeight-vh,1);
-  var desk=W>900; offX=desk?3.4:0; offY=desk?0:-1.7;
+  var desk=W>900; offX=desk?4.6:0; offY=desk?0:-1.7;
   document.body.classList.toggle('compact',W<700);
   if(!gl) return;
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,W<700?1.5:2));
@@ -412,7 +412,7 @@ function frame(now){
   var i0=Math.min(Math.floor(u),2), fr=u-i0, w=u>=3?1:ss(0.35,0.75,fr);
   var focus=(u>=3?3:(i0+w))*SP;
   var a=-0.4*(1-h)+0.5*Math.sin(u*2.2);
-  var d=dBase*(1+0.7*(1-h));
+  var d=dBase*(1+0.4*(1-h));
   var camY=1.6+1.4*(1-h);
   var tx=focus-offX;
   camera.position.set(tx+Math.sin(a)*d, camY, Math.cos(a)*d);
@@ -448,7 +448,7 @@ function init(){
     v3=new THREE.Vector3();
     renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
     renderer.setClearColor(0x06090C,1);
-    scene=new THREE.Scene(); scene.background=new THREE.Color(0x06090C); scene.fog=new THREE.Fog(0x06090C,22,64);
+    scene=new THREE.Scene(); scene.background=new THREE.Color(0x06090C); scene.fog=new THREE.Fog(0x06090C,34,100);
     camera=new THREE.PerspectiveCamera(38,1,0.1,200);
     scene.add(new THREE.AmbientLight(0xffffff,0.7));
     var dl=new THREE.DirectionalLight(0xffffff,0.9); dl.position.set(6,10,8); scene.add(dl);
