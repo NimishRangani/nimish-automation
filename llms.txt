@@ -1,0 +1,28 @@
+# Nimish Rangani Automation
+
+> AI automation services in Auckland, New Zealand. Nimish Rangani builds n8n and LLM workflows for outreach, content production and internal operations, and works remotely with clients elsewhere.
+
+## About
+- Nimish Rangani is an AI automation engineer based in Auckland, New Zealand, with 7+ years in enterprise IT (Bosch, Seqirus, Sigma Healthcare).
+- Education: Master of ICT (La Trobe University), Bachelor of IT (University of Mumbai). Certified Associate in Software Testing (CAST).
+- Tools: n8n, Claude API and other LLMs, PostgreSQL, Supabase, Modal, Remotion, FLUX, Whisper, edge-tts.
+
+## Services
+- Outreach with reply triage: n8n send and follow-up workflows, LLM reply classification, PostgreSQL log.
+- Content pipeline: LLM scripting, voiceover, Remotion video or FLUX and Whisper on Modal, automatic publishing.
+- Custom AI workflow: scoped build around a client's existing tools using the Claude API and n8n.
+- Price is set after a 30-minute call and a written scope.
+
+## Case studies (all built and run by Nimish Rangani)
+- Outreach that sorts its own replies: live for two businesses, LLM classifies replies as interested, not interested or referral, no manual triage.
+- A video factory with no operator: LLM script, edge-tts voiceover, Remotion render, auto-publish; batches of 100+ videos per run.
+- GPU work without a GPU server: FLUX image generation and Whisper captions on Modal, orchestrated by n8n, cross-posted automatically.
+- A live AI product: Claude API content analysis with Supabase auth, PostgreSQL and TypeScript frontend, serving real users.
+
+## Pages
+- [Home](https://aiexpert.qd.je/): all content, case studies, services, FAQ and contact details.
+
+## Contact
+- Email: nim_rangani@outlook.com
+- Phone: +64 22 104 1369
+- LinkedIn: https://www.linkedin.com/in/nimit369
