@@ -30,6 +30,7 @@
 ## Pages
 - [Home](https://aiexpert.qd.je/): all content, case studies, services, FAQ and contact details.
 - [Pricing](https://aiexpert.qd.je/pricing/): package prices in NZD, what is and is not included, pricing FAQ.
+- [Blog](https://aiexpert.qd.je/blog/): practical guides on AI automation, n8n and LLM workflows for New Zealand businesses (new posts added regularly; RSS at https://aiexpert.qd.je/blog/feed.xml).
 
 ## Contact
 - Email: nim_rangani@outlook.com
