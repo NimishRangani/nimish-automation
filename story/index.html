@@ -341,7 +341,7 @@ var CASES=[
    {k:'logic',t:'PostgreSQL',p:[2.5,0.7,-0.4]},{k:'out',t:'Email notice',p:[5,-0.3,0.4]}],
   edges:[[0,1],[1,2],[2,3],[3,4]]}
 ];
-var SP=22, KC={source:0x5BA3DB,ai:0xF0B84A,logic:0x8A9BA7,out:0x3FC6C1};
+var SP=14, KC={source:0x5BA3DB,ai:0xF0B84A,logic:0x8A9BA7,out:0x3FC6C1};
 var cv=$('#gl'), labelsEl=$('#labels'), hero=$('#hero'), sys=$('#systems');
 var panels=Array.prototype.slice.call(document.querySelectorAll('.sys-panel'));
 var dotEls=Array.prototype.slice.call(document.querySelectorAll('.dots i'));
@@ -402,7 +402,7 @@ function frame(now){
   // panels and dots (driven by the smoothed scroll so they stay in step with the camera)
   var active=Math.round(u);
   panels.forEach(function(p,i){
-    var d=Math.abs(u-i), op=cl(1-(d-0.18)*4.5,0,1);
+    var d=Math.abs(u-i), op=cl(1-(d-0.3)*5,0,1);
     p.style.opacity=op.toFixed(3);
     p.style.transform=(W>900?'translateY(calc(-50% + '+((i-u)*70).toFixed(1)+'px))':'translateY('+((i-u)*50).toFixed(1)+'px)');
     p.style.pointerEvents=op>0.5?'auto':'none';
@@ -410,7 +410,7 @@ function frame(now){
   dotEls.forEach(function(d,i){d.classList.toggle('on',i===active && t>0);});
 
   if(sy>sysTop+sysLen+vh) return; // canvas fully covered by solid sections
-  var i0=Math.min(Math.floor(u),2), fr=u-i0, w=u>=3?1:ss(0.35,0.75,fr);
+  var i0=Math.min(Math.floor(u),2), fr=u-i0, w=u>=3?1:ss(0.3,0.7,fr);
   var focus=(u>=3?3:(i0+w))*SP;
   var a=-0.4*(1-h)+0.5*Math.sin(u*2.2);
   var d=dBase*(1+0.4*(1-h));
@@ -433,7 +433,7 @@ function frame(now){
   });
   scene.updateMatrixWorld(true);
   groups.forEach(function(g,gi){
-    var wgt=cl(1-(Math.abs(u-gi)-0.2)*3,0,1)*cl((h-0.55)/0.4,0,1)*cl(1-(sy-(sysTop+sysLen))/(vh*0.3),0,1);
+    var wgt=cl(1-(Math.abs(u-gi)-0.3)*4,0,1)*cl((h-0.55)/0.4,0,1)*cl(1-(sy-(sysTop+sysLen))/(vh*0.3),0,1);
     g.nodes.forEach(function(n){
       if(wgt<0.02){n.el.style.opacity=0; return;}
       n.g.getWorldPosition(v3); v3.y-=1.0; v3.project(camera);
