@@ -388,7 +388,8 @@ function metrics(){
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,W<700?1.5:2));
   renderer.setSize(W,H,false); camera.aspect=W/H; camera.updateProjectionMatrix();
   var tv=Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
-  dBase=Math.max((6.4+Math.abs(offX))/(tv*camera.aspect*0.94), 5.2/tv, 11);
+  dBase=Math.max((desk?6.4+offX:5.6)/(tv*camera.aspect*0.94), 5.2/tv, 11);
+  scene.fog.near=dBase*1.9; scene.fog.far=dBase*5.5;
 }
 function frame(now){
   requestAnimationFrame(frame);
