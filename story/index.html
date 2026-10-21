@@ -38,7 +38,7 @@ a{color:inherit}
 
 #gl{position:fixed; inset:0; width:100%; height:100%; z-index:0; display:block; opacity:0; transition:opacity 1.2s ease}
 #gl.on{opacity:1}
-#labels{position:fixed; inset:0; z-index:2; pointer-events:none; overflow:hidden}
+#labels{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
 .label{position:absolute; left:0; top:0; display:flex; align-items:center; gap:6px; font:500 11px var(--font-mono); white-space:nowrap; will-change:transform,opacity}
 .label .n{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:var(--fg); color:var(--bg); font-size:10px}
 .label .t{background:rgba(6,9,12,.7); padding:1px 6px; border-radius:4px}
@@ -432,7 +432,7 @@ function frame(now){
   });
   scene.updateMatrixWorld(true);
   groups.forEach(function(g,gi){
-    var wgt=cl(1-(Math.abs(u-gi)-0.2)*3,0,1)*cl((h-0.55)/0.4,0,1);
+    var wgt=cl(1-(Math.abs(u-gi)-0.2)*3,0,1)*cl((h-0.55)/0.4,0,1)*cl(1-(sy-(sysTop+sysLen))/(vh*0.3),0,1);
     g.nodes.forEach(function(n){
       if(wgt<0.02){n.el.style.opacity=0; return;}
       n.g.getWorldPosition(v3); v3.y-=1.0; v3.project(camera);
