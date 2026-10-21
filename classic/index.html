@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Automation Auckland | n8n and LLM Workflows | Nimish Rangani</title>
+<meta name="description" content="AI automation in Auckland, NZ. Nimish Rangani builds n8n and LLM workflows for outreach, content and operations. See four live pipelines in 3D.">
+<link rel="canonical" href="https://aiexpert.qd.je/">
+<meta name="robots" content="noindex, follow">
+<meta name="author" content="Nimish Rangani">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#EDF0F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E161B" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nimish Rangani Automation">
+<meta property="og:locale" content="en_NZ">
+<meta property="og:title" content="AI Automation Auckland | n8n and LLM Workflows">
+<meta property="og:description" content="n8n and LLM workflows for outreach, content and operations. Four live systems shown as 3D maps you can rotate.">
+<meta property="og:url" content="https://aiexpert.qd.je/">
+<meta property="og:image" content="https://aiexpert.qd.je/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Expert: AI automation that does the work. Auckland, New Zealand.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Automation Auckland | n8n and LLM Workflows">
+<meta name="twitter:description" content="n8n and LLM workflows for outreach, content and operations. Four live systems shown as 3D maps you can rotate.">
+<meta name="twitter:image" content="https://aiexpert.qd.je/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: header nav, hero, one big 3D pipeline stage with a case panel, brief summaries, offers, about, FAQ, contact.
+   Tokens: cool slate neutrals, one teal accent, amber reserved for data packets and AI steps. */
+:root{
+  --bg:#EDF0F3; --surface:#F9FAFB; --fg:#13202A; --muted:#52616D; --line:#CBD3DA;
+  --accent:#0B7F86; --accent-fg:#FFFFFF; --packet:#D9822B;
+  --stage:#E2E8EC; --stage-hi:#F4F7F9;
+  --k-source:#2F6FA3; --k-ai:#C98A12; --k-logic:#5C6B78; --k-out:#0B8F7B;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Schibsted Grotesk','Segoe UI',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E161B; --surface:#141F26; --fg:#E6EEF2; --muted:#93A4AF; --line:#26343D;
+    --accent:#3FC6C1; --accent-fg:#06161A; --packet:#F5C45E;
+    --stage:#0A1115; --stage-hi:#13202A;
+    --k-source:#5BA3DB; --k-ai:#F0B84A; --k-logic:#8A9BA7; --k-out:#3FC6C1;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E161B; --surface:#141F26; --fg:#E6EEF2; --muted:#93A4AF; --line:#26343D;
+  --accent:#3FC6C1; --accent-fg:#06161A; --packet:#F5C45E;
+  --stage:#0A1115; --stage-hi:#13202A;
+  --k-source:#5BA3DB; --k-ai:#F0B84A; --k-logic:#8A9BA7; --k-out:#3FC6C1;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+[hidden]{display:none!important}
+body{
+  margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-size:16px; line-height:1.55;
+  padding-inline:max(16px, env(safe-area-inset-left,0px)) max(16px, env(safe-area-inset-right,0px));
+  padding-block:20px 40px;
+}
+.wrap{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:64px}
+main{display:flex; flex-direction:column; gap:64px}
+a{color:var(--accent)}
+.skip{position:absolute; left:-999px; top:8px; background:var(--accent); color:var(--accent-fg); padding:8px 14px; border-radius:6px; z-index:10}
+.skip:focus{left:16px}
+.mono{font-family:var(--font-mono)}
+.eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+
+header.top{display:flex; justify-content:space-between; align-items:center; gap:12px 24px; flex-wrap:wrap}
+.brand{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg); font-family:var(--font-display); font-weight:700; font-size:22px; line-height:1}
+.brand i{font-style:normal; color:var(--accent)}
+header.top nav{display:flex; flex-wrap:wrap; gap:4px 18px}
+header.top nav a{font-size:14px; color:var(--fg); text-decoration:none; padding:6px 0}
+header.top nav a:hover{color:var(--accent); text-decoration:underline}
+
+.hero{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:32px; align-items:end}
+.hero h1{font-family:var(--font-display); font-weight:700; font-size:clamp(2rem,5.4vw,3.7rem); line-height:1.04; margin:12px 0 0; text-wrap:balance}
+.hero p{margin:0; color:var(--muted); font-size:17px; max-width:50ch}
+.hero .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+.btn{display:inline-flex; align-items:center; min-height:44px; padding:0 18px; border-radius:8px; font-weight:600; font-size:15px; text-decoration:none; border:1px solid var(--line); color:var(--fg); background:var(--surface)}
+.btn.primary{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.btn:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+h2{font-family:var(--font-display); font-size:clamp(1.5rem,3.2vw,2.1rem); line-height:1.1; margin:6px 0 0; text-wrap:balance}
+.sec-head{display:flex; flex-direction:column; gap:4px; margin-bottom:20px}
+.sec-head p{margin:6px 0 0; color:var(--muted); max-width:62ch}
+
+.tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+.tabs button{min-height:40px; padding:0 14px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--fg); font:500 14px var(--font-body); cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.stage-grid{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:20px; align-items:start}
+.canvas-wrap{
+  position:relative; height:clamp(340px,54vw,560px); overflow:hidden; border:1px solid var(--line); border-radius:14px;
+  background:radial-gradient(ellipse at 50% 38%, var(--stage-hi), var(--stage) 72%);
+}
+.canvas-wrap canvas{position:absolute; inset:0; width:100%; height:100%; display:block; cursor:grab; touch-action:pan-y}
+.labels{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+.label{position:absolute; left:0; top:0; display:flex; align-items:center; gap:6px; font:500 11px var(--font-mono); color:var(--fg); white-space:nowrap; will-change:transform}
+.label .n{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:var(--fg); color:var(--bg); font-size:10px}
+.label .t{background:color-mix(in srgb, var(--bg) 78%, transparent); padding:1px 5px; border-radius:4px}
+.canvas-wrap.compact .label .t{display:none}
+.hint{position:absolute; top:12px; right:14px; font:12px var(--font-mono); color:var(--muted); pointer-events:none}
+.legend{position:absolute; left:14px; bottom:12px; right:14px; display:flex; flex-wrap:wrap; gap:6px 14px; font:11px var(--font-mono); color:var(--muted); pointer-events:none}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.loadmsg,.fallback{position:absolute; inset:0; display:none; place-items:center; text-align:center; padding:24px; color:var(--muted); margin:0}
+.canvas-wrap.loading .loadmsg{display:grid}
+.canvas-wrap.nogl .fallback{display:grid}
+.canvas-wrap.nogl .hint,.canvas-wrap.nogl .legend,.canvas-wrap.loading .hint{display:none}
+
+.dot{display:inline-block; width:11px; height:11px; flex:none}
+.k-source{background:var(--k-source); border-radius:2px}
+.k-ai{background:var(--k-ai); transform:rotate(45deg) scale(.85)}
+.k-logic{background:var(--k-logic); clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.k-out{background:var(--k-out); border-radius:50%}
+
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:16px; min-width:0}
+.panel h3{font-family:var(--font-display); font-size:1.35rem; line-height:1.15; margin:0}
+.chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.chips li{font:12px var(--font-mono); padding:3px 8px; border:1px solid var(--line); border-radius:6px; color:var(--muted)}
+.facts{display:grid; gap:10px; margin:0}
+.facts div{display:grid; grid-template-columns:72px minmax(0,1fr); gap:10px}
+.facts dt{font:11px var(--font-mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:3px}
+.facts dd{margin:0; font-size:15px}
+.steps{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.step{display:flex; align-items:center; gap:10px; width:100%; min-height:42px; padding:6px 10px; text-align:left; border:1px solid var(--line); border-radius:8px; background:transparent; color:var(--fg); font:500 14px var(--font-body); cursor:pointer}
+.step .num{font:11px var(--font-mono); color:var(--muted); width:14px}
+.step .nm{flex:1; min-width:0}
+.step .kd{font:11px var(--font-mono); color:var(--muted)}
+.step[aria-current="true"]{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent)}
+.detail{background:var(--stage); border-radius:8px; padding:12px 14px; font-size:14px; min-height:3.6em}
+.detail strong{font-family:var(--font-display); display:block; margin-bottom:2px}
+noscript .detail{display:block}
+
+.brief{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.brief article{border-top:1px solid var(--line); padding-top:14px}
+.brief h3{font-family:var(--font-display); font-size:1.15rem; margin:0 0 4px}
+.brief .stack{font:12px var(--font-mono); color:var(--muted); margin:0 0 8px}
+.brief p{margin:0 0 6px; font-size:15px}
+.brief p b{font-weight:600}
+
+.offers{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
+.offer{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:10px}
+.offer h3{font-family:var(--font-display); font-size:1.2rem; margin:0}
+.offer p{margin:0; color:var(--muted); font-size:15px}
+.offer ul{margin:0; padding-left:18px; font-size:14px}
+.offer li{margin:2px 0}
+.process{display:flex; flex-wrap:wrap; gap:12px 28px; margin-top:20px; padding-top:18px; border-top:1px solid var(--line); list-style:none; padding-left:0; margin-bottom:0}
+.process li{display:flex; gap:10px; align-items:baseline; font-size:15px}
+.process .mono{color:var(--accent); font-size:13px}
+
+.about{display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:32px; align-items:start}
+.about p{margin:0 0 12px; max-width:60ch}
+.about dl{margin:0; display:grid; gap:12px; border-left:1px solid var(--line); padding-left:20px}
+.about dt{font:11px var(--font-mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.about dd{margin:2px 0 0; font-size:15px}
+
+.faq{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 32px}
+.faq h3{font-family:var(--font-display); font-size:1.1rem; margin:0 0 4px}
+.faq p{margin:0; color:var(--muted); font-size:15px}
+
+.contact{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:clamp(20px,4vw,36px); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; align-items:center}
+.contact p{margin:8px 0 0; color:var(--muted)}
+.rows{display:grid; gap:10px}
+.row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px; border:1px solid var(--line); border-radius:8px; min-width:0}
+.row span,.row a{font:500 14px var(--font-mono); overflow-wrap:anywhere}
+.row .acts{display:flex; gap:6px; flex:none}
+.row button,.row .mini{min-height:36px; padding:0 12px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); font:500 13px var(--font-body); cursor:pointer; display:inline-flex; align-items:center; text-decoration:none}
+
+.li{display:flex; align-items:center; gap:16px; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--fg); text-decoration:none; min-width:0}
+.li svg{flex:none}
+.li b{display:block; font-family:var(--font-display); font-size:1.1rem}
+.li small{display:block; font:13px var(--font-mono); color:var(--muted); overflow-wrap:anywhere}
+.li:hover{border-color:#0A66C2}
+footer{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; padding-top:20px; border-top:1px solid var(--line); font-size:13px; color:var(--muted)}
+footer a{color:var(--muted)}
+
+@media (max-width:900px){
+  .hero,.stage-grid,.contact,.about,.brief,.faq,.offers{grid-template-columns:minmax(0,1fr)}
+  .about dl{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:16px}
+  .wrap,main{gap:48px}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/" aria-label="AI Expert, home">
+      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 50 L32 13 L51 50"/><path d="M19.7 37 L44.3 37"/></g>
+        <circle cx="19.7" cy="37" r="3" fill="var(--accent)"/><circle cx="44.3" cy="37" r="3" fill="var(--accent)"/>
+        <circle cx="13" cy="50" r="5.6" fill="var(--accent)"/><circle cx="51" cy="50" r="5.6" fill="var(--accent)"/>
+        <circle cx="32" cy="13" r="6" fill="var(--packet)"/>
+      </svg>
+      <span><i>AI</i> Expert</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#stage">Case studies</a>
+      <a href="#offers">Services</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="top-h">
+      <div>
+        <div class="eyebrow">n8n and LLM workflows · Auckland, New Zealand</div>
+        <h1 id="top-h">AI automation that runs the repetitive work for you</h1>
+      </div>
+      <div>
+        <p>I'm Nimish Rangani, an AI automation engineer in Auckland. I build workflows for outreach, content and internal operations. Four systems I built and run are shown below as 3D maps you can rotate.</p>
+        <div class="actions">
+          <a class="btn primary" href="#stage">Explore the pipelines</a>
+          <a class="btn" href="#contact">Book a call</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="stage" aria-labelledby="stage-h">
+      <div class="sec-head">
+        <div class="eyebrow">Case studies</div>
+        <h2 id="stage-h">Pipelines I have built</h2>
+        <p>Pick a pipeline. Drag the scene to rotate it, then click a step or choose it from the list to see what it does.</p>
+      </div>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Case studies"></div>
+      <div class="stage-grid">
+        <div class="canvas-wrap loading" id="canvasWrap" role="img" aria-label="Interactive 3D map of the selected pipeline. The same steps are listed beside it.">
+          <div class="labels" id="labels"></div>
+          <div class="hint">Drag to rotate · click a step</div>
+          <div class="legend">
+            <span><i class="dot k-source"></i>Input</span>
+            <span><i class="dot k-ai"></i>AI step</span>
+            <span><i class="dot k-logic"></i>Logic</span>
+            <span><i class="dot k-out"></i>Output</span>
+          </div>
+          <p class="loadmsg">Loading 3D view…</p>
+          <p class="fallback">The 3D view needs WebGL, which this browser has turned off. The step list next to it shows the same pipeline.</p>
+        </div>
+        <div class="panel">
+          <div>
+            <h3 id="caseTitle"></h3>
+            <ul class="chips" id="caseStack" style="margin-top:10px"></ul>
+          </div>
+          <dl class="facts">
+            <div><dt>Problem</dt><dd id="caseProblem"></dd></div>
+            <div><dt>Built</dt><dd id="caseBuilt"></dd></div>
+            <div><dt>Result</dt><dd id="caseResult"></dd></div>
+          </dl>
+          <ol class="steps" id="steps" aria-label="Pipeline steps"></ol>
+          <div class="detail" id="detail" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="brief-h">
+      <div class="sec-head">
+        <div class="eyebrow">In brief</div>
+        <h2 id="brief-h">The four systems at a glance</h2>
+      </div>
+      <div class="brief">
+        <article>
+          <h3>Outreach that sorts its own replies</h3>
+          <p class="stack">n8n · PostgreSQL · LLM reply classification</p>
+          <p><b>Problem.</b> Cold outreach for two businesses needed sending, follow-ups and reply sorting by hand.</p>
+          <p><b>Built.</b> Send sequences, an LLM that labels each reply as interested, not interested or referral, automated follow-up routing and BCC logging.</p>
+          <p><b>Result.</b> Live for two businesses with no manual triage.</p>
+        </article>
+        <article>
+          <h3>A video factory with no operator</h3>
+          <p class="stack">Remotion · Node.js · edge-tts · LLM scriptwriting</p>
+          <p><b>Problem.</b> Producing short videos at volume meant a person at every stage.</p>
+          <p><b>Built.</b> An LLM writes each script, edge-tts voices it, Remotion renders it, and the result publishes itself.</p>
+          <p><b>Result.</b> Batches of 100+ videos with zero manual intervention per run.</p>
+        </article>
+        <article>
+          <h3>GPU work without a GPU server</h3>
+          <p class="stack">Modal · Python · FLUX · Whisper · n8n</p>
+          <p><b>Problem.</b> Image generation and captioning need GPUs that would sit idle between jobs.</p>
+          <p><b>Built.</b> n8n starts serverless GPU jobs on Modal: FLUX for images, Whisper for captions. Outputs post themselves.</p>
+          <p><b>Result.</b> Images and captions generated on demand and cross-posted to several platforms automatically.</p>
+        </article>
+        <article>
+          <h3>A live AI product, end to end</h3>
+          <p class="stack">Claude API · Supabase · TypeScript · PostgreSQL</p>
+          <p><b>Problem.</b> Checking content against policy frameworks was slow and inconsistent by hand.</p>
+          <p><b>Built.</b> A full-stack tool: TypeScript frontend, Supabase auth, PostgreSQL data layer, Claude API analysis and automated email notifications.</p>
+          <p><b>Result.</b> Live deployment serving real users.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="offers" aria-labelledby="offers-h">
+      <div class="sec-head">
+        <div class="eyebrow">Services</div>
+        <h2 id="offers-h">What I can build for you</h2>
+        <p>Scope is agreed in writing before any work starts. Price follows the scope.</p>
+      </div>
+      <div class="offers">
+        <article class="offer">
+          <h3>Outreach with reply triage</h3>
+          <p>Cold sequences that sort their own replies and route the follow-ups.</p>
+          <ul>
+            <li>n8n send and follow-up workflows</li>
+            <li>LLM labels for every reply</li>
+            <li>A PostgreSQL log you can query</li>
+          </ul>
+        </article>
+        <article class="offer">
+          <h3>Content pipeline</h3>
+          <p>Script, voice, image or video, then publish, run in batches without an operator.</p>
+          <ul>
+            <li>LLM scripting and voiceover</li>
+            <li>Remotion video or FLUX and Whisper on Modal</li>
+            <li>Auto-publishing to your platforms</li>
+          </ul>
+        </article>
+        <article class="offer">
+          <h3>Custom AI workflow</h3>
+          <p>A scoped build around the tools your team already uses.</p>
+          <ul>
+            <li>Claude API and n8n</li>
+            <li>Supabase or PostgreSQL where data is needed</li>
+            <li>Handover notes so you can run it</li>
+          </ul>
+        </article>
+      </div>
+      <ol class="process" aria-label="How a project runs">
+        <li><span class="mono">1</span>30-minute call</li>
+        <li><span class="mono">2</span>Written scope and price</li>
+        <li><span class="mono">3</span>Build, test, hand over</li>
+      </ol>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-h">
+      <div>
+        <div class="sec-head" style="margin-bottom:12px">
+          <div class="eyebrow">About</div>
+          <h2 id="about-h">Who builds your automation</h2>
+        </div>
+        <p>I'm an AI automation engineer based in Auckland, New Zealand. Before building automation full time I spent over seven years in enterprise IT at Bosch, Seqirus and Sigma Healthcare: supporting users, running servers and building data models in Azure DataFactory, Power BI and Snowflake.</p>
+        <p>That background shapes how I build. Every step is logged, the workflow is written down, and the system is kept simple enough for someone else to run.</p>
+      </div>
+      <dl>
+        <div><dt>Focus</dt><dd>n8n, LLM workflows, Claude API, serverless GPU jobs</dd></div>
+        <div><dt>Education</dt><dd>Master of ICT, La Trobe University<br>Bachelor of IT, University of Mumbai</dd></div>
+        <div><dt>Certification</dt><dd>Certified Associate in Software Testing (CAST)</dd></div>
+        <div><dt>Location</dt><dd>Auckland, New Zealand. Remote work welcome.</dd></div>
+      </dl>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="sec-head">
+        <div class="eyebrow">Questions</div>
+        <h2 id="faq-h">Common questions</h2>
+      </div>
+      <div class="faq">
+        <div><h3>What can be automated with AI?</h3><p>Repetitive work that follows rules but needs judgement on text: sorting replies, sending outreach, producing and publishing content, and moving data between tools. If you repeat the same task more than a few times a week, it is a candidate.</p></div>
+        <div><h3>Which tools do you use?</h3><p>n8n for orchestration, the Claude API and other LLMs for language tasks, PostgreSQL or Supabase for data, and Modal for GPU jobs. I build around the tools you already use.</p></div>
+        <div><h3>How much does an automation project cost?</h3><p>The price is set after a 30-minute call and a written scope, so you know the cost before any work starts.</p></div>
+        <div><h3>Do you work outside Auckland?</h3><p>Yes. I am based in Auckland, New Zealand, and work remotely with clients elsewhere.</p></div>
+        <div><h3>Who owns the finished workflow?</h3><p>You do. I hand over the workflows with notes on how they run, so you are not tied to me to keep them going.</p></div>
+        <div><h3>Are the case studies real?</h3><p>Yes. Each of the four systems shown is one I built and run myself.</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <div>
+        <div class="eyebrow">Start here</div>
+        <h2 id="contact-h">Tell me what takes up your week</h2>
+        <p>Send two lines about the task you repeat most. I will reply with whether it can be automated and what it would take.</p>
+      </div>
+      <div class="rows">
+        <div class="row"><span id="em">nim_rangani@outlook.com</span><div class="acts"><a class="mini" href="mailto:nim_rangani@outlook.com?subject=Automation%20enquiry">Email</a><button type="button" data-copy="em">Copy</button></div></div>
+        <div class="row"><span id="ph">0221 041 369</span><div class="acts"><a class="mini" href="tel:+64221041369">Call</a><button type="button" data-copy="ph">Copy</button></div></div>
+        <a class="li" href="https://www.linkedin.com/in/nimit369" target="_blank" rel="noopener me">
+          <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><path fill="#0A66C2" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <span><b>Connect on LinkedIn</b><small>linkedin.com/in/nimit369</small></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 AI Expert · Auckland, New Zealand</span>
+    <span>No cookies, no analytics. <a href="/llms.txt">llms.txt</a></span>
+  </footer>
+</div>
+
+<noscript><p style="max-width:1180px;margin:16px auto;padding:0 16px">The interactive 3D case studies need JavaScript. The four systems are summarised in the section above.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+var CASES=[
+ {tab:'Outreach', title:'Outreach that sorts its own replies',
+  stack:['n8n','PostgreSQL','LLM reply classification'],
+  problem:'Cold outreach for two businesses needed sending, follow-ups and reply sorting by hand.',
+  built:'Send sequences, an LLM that labels each reply, automated follow-up routing and BCC logging.',
+  result:'Live for two businesses with no manual triage.',
+  nodes:[
+   {t:'Lead list',k:'source',p:[-5,-0.2,0.4],d:'Prospect records in PostgreSQL feed the sequence.'},
+   {t:'Send sequence',k:'logic',p:[-3,0.7,-0.6],d:'n8n runs the cold send sequence on a schedule.'},
+   {t:'Reply inbox',k:'source',p:[-1,-0.5,0.6],d:'Replies come back into the same workflow. Every message is BCC-logged.'},
+   {t:'Classifier',k:'ai',p:[1,0.6,-0.4],d:'An LLM labels each reply as interested, not interested or referral.'},
+   {t:'Follow-up router',k:'logic',p:[3,-0.4,0.6],d:'The label decides what happens next: follow up, stop, or pass the referral on.'},
+   {t:'Log',k:'out',p:[5,0.5,-0.4],d:'Every send and reply is written to Postgres, so nothing needs sorting by hand.'}],
+  edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[4,1,1]]},
+ {tab:'Video factory', title:'A video factory with no operator',
+  stack:['Remotion','Node.js','edge-tts','LLM scriptwriting'],
+  problem:'Producing short videos at volume meant a person at every stage.',
+  built:'An LLM writes each script, edge-tts voices it, Remotion renders it, and the result publishes itself.',
+  result:'Batches of 100+ videos with zero manual intervention per run.',
+  nodes:[
+   {t:'Topic batch',k:'source',p:[-5,-0.3,0.3],d:'Each run starts from a batch of topics.'},
+   {t:'LLM script',k:'ai',p:[-2.5,0.7,-0.5],d:'An LLM writes the script for every video.'},
+   {t:'Voiceover',k:'ai',p:[0,-0.6,0.8],d:'edge-tts turns the script into a voiceover.'},
+   {t:'Remotion render',k:'logic',p:[2.5,0.6,-0.4],d:'Remotion renders a structured video from the script and audio.'},
+   {t:'Auto-publish',k:'out',p:[5,-0.3,0.4],d:'Finished videos publish to the platform with no manual step.'}],
+  edges:[[0,1],[1,2],[2,3],[1,3,1],[3,4]]},
+ {tab:'GPU pipeline', title:'GPU work without a GPU server',
+  stack:['Modal','Python','FLUX','Whisper','n8n'],
+  problem:'Image generation and captioning need GPUs that would sit idle between jobs.',
+  built:'n8n starts serverless GPU jobs on Modal: FLUX for images, Whisper for captions. Outputs post themselves.',
+  result:'Images and captions generated on demand and cross-posted to several platforms automatically.',
+  nodes:[
+   {t:'n8n trigger',k:'logic',p:[-5,0,0],d:'n8n starts each job and tracks it.'},
+   {t:'FLUX images',k:'ai',p:[-2,1.0,-0.6],d:'FLUX generates images on a GPU that Modal starts on demand.'},
+   {t:'Whisper captions',k:'ai',p:[-2,-0.9,0.8],d:'Whisper transcribes audio into captions.'},
+   {t:'Assemble',k:'logic',p:[1.4,0.1,0],d:'Images and captions are combined into a post.'},
+   {t:'Cross-post',k:'out',p:[4.8,0.1,0],d:'The finished post goes out to multiple platforms automatically.'}],
+  edges:[[0,1],[0,2],[1,3],[2,3],[3,4]]},
+ {tab:'AI product', title:'A live AI product, end to end',
+  stack:['Claude API','Supabase','TypeScript','PostgreSQL'],
+  problem:'Checking content against policy frameworks was slow and inconsistent by hand.',
+  built:'A full-stack tool: TypeScript frontend, Supabase auth, PostgreSQL data layer, Claude API analysis and automated email notifications.',
+  result:'Live deployment serving real users.',
+  nodes:[
+   {t:'Frontend',k:'source',p:[-5,-0.3,0.4],d:'Users submit content for analysis from a TypeScript frontend.'},
+   {t:'Supabase auth',k:'logic',p:[-2.5,0.7,-0.5],d:'Sign-in and per-user access.'},
+   {t:'Claude analysis',k:'ai',p:[0,-0.4,0.7],d:'The Claude API checks the content against policy frameworks.'},
+   {t:'PostgreSQL',k:'logic',p:[2.5,0.7,-0.4],d:'Results are stored in the data layer.'},
+   {t:'Email notice',k:'out',p:[5,-0.3,0.4],d:'An automated email pipeline notifies the user.'}],
+  edges:[[0,1],[1,2],[2,3],[3,4]]}
+];
+var KIND={source:{v:'--k-source',name:'Input'},ai:{v:'--k-ai',name:'AI step'},logic:{v:'--k-logic',name:'Logic'},out:{v:'--k-out',name:'Output'}};
+function $(s){return document.querySelector(s);}
+function cssVar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var tabsEl=$('#tabs'), stepsEl=$('#steps'), wrapEl=$('#canvasWrap'), labelsEl=$('#labels');
+var cur=0, sel=0, gl=false;
+var renderer,scene,camera,root,ray,nodes=[],packets=[];
+var visible=true,dirty=true,userYaw=-0.3,userPitch=0.28,yaw=-0.3,pitch=0.28,idleT=0,drag=false,hover=-1,buildAt=0,W=1,H=1,lastT=0,v3;
+
+CASES.forEach(function(c,i){
+  var b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.textContent=c.tab;
+  b.addEventListener('click',function(){setCase(i);}); tabsEl.appendChild(b);
+});
+function renderPanel(){
+  var c=CASES[cur];
+  Array.prototype.forEach.call(tabsEl.children,function(b,i){b.setAttribute('aria-selected',i===cur?'true':'false');});
+  $('#caseTitle').textContent=c.title;
+  $('#caseStack').innerHTML=c.stack.map(function(s){return '<li>'+s+'</li>';}).join('');
+  $('#caseProblem').textContent=c.problem; $('#caseBuilt').textContent=c.built; $('#caseResult').textContent=c.result;
+  stepsEl.innerHTML='';
+  c.nodes.forEach(function(n,i){
+    var li=document.createElement('li'), b=document.createElement('button');
+    b.type='button'; b.className='step';
+    b.innerHTML='<i class="dot k-'+n.k+'"></i><span class="num">'+(i+1)+'</span><span class="nm">'+n.t+'</span><span class="kd">'+KIND[n.k].name+'</span>';
+    b.addEventListener('click',function(){select(i);});
+    li.appendChild(b); stepsEl.appendChild(li);
+  });
+  select(sel);
+}
+function select(i){
+  sel=i; var n=CASES[cur].nodes[i];
+  Array.prototype.forEach.call(stepsEl.querySelectorAll('.step'),function(b,j){b.setAttribute('aria-current',j===i?'true':'false');});
+  var d=$('#detail'); d.innerHTML=''; var s=document.createElement('strong'); s.textContent=(i+1)+'. '+n.t;
+  d.appendChild(s); d.appendChild(document.createTextNode(n.d)); dirty=true;
+}
+function setCase(i){cur=i; sel=0; renderPanel(); if(gl) build(i);}
+
+function geo(k){
+  if(k==='ai') return new THREE.OctahedronGeometry(0.85);
+  if(k==='logic') return new THREE.CylinderGeometry(0.62,0.62,0.7,6);
+  if(k==='out') return new THREE.SphereGeometry(0.62,28,18);
+  return new THREE.BoxGeometry(1.5,0.8,0.8);
+}
+function build(i){
+  for(var o of root.children.slice()){root.remove(o); o.traverse(function(x){if(x.geometry)x.geometry.dispose(); if(x.material)x.material.dispose();});}
+  labelsEl.innerHTML=''; nodes=[]; packets=[];
+  var c=CASES[i], fg=cssVar('--fg'), line=cssVar('--line'), muted=cssVar('--muted'), pk=cssVar('--packet');
+  var grid=new THREE.GridHelper(18,18,line,line); grid.position.y=-1.9; root.add(grid);
+  c.nodes.forEach(function(n,idx){
+    var col=cssVar(KIND[n.k].v), g=new THREE.Group(); g.position.set(n.p[0],n.p[1],n.p[2]);
+    var mat=new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:0.15,roughness:0.5,metalness:0.1});
+    var mesh=new THREE.Mesh(geo(n.k),mat); mesh.userData.idx=idx; g.add(mesh);
+    if(n.k!=='out') g.add(new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry),new THREE.LineBasicMaterial({color:fg})));
+    root.add(g);
+    var el=document.createElement('div'); el.className='label';
+    el.innerHTML='<span class="n">'+(idx+1)+'</span><span class="t">'+n.t+'</span>'; labelsEl.appendChild(el);
+    nodes.push({g:g,mat:mat,mesh:mesh,el:el});
+  });
+  c.edges.forEach(function(e){
+    var a=nodes[e[0]].g.position, b=nodes[e[1]].g.position;
+    var mid=a.clone().add(b).multiplyScalar(0.5); mid.y+=e[2]?2.2:0.35;
+    var curve=new THREE.QuadraticBezierCurve3(a.clone(),mid,b.clone());
+    root.add(new THREE.Mesh(new THREE.TubeGeometry(curve,32,0.035,6,false),new THREE.MeshBasicMaterial({color:muted})));
+    for(var k=0;k<2;k++){
+      var m=new THREE.Mesh(new THREE.SphereGeometry(0.1,12,10),new THREE.MeshBasicMaterial({color:pk})); root.add(m);
+      packets.push({mesh:m,curve:curve,t:(k+Math.random()*0.3)/2,sp:0.13+Math.random()*0.05});
+    }
+  });
+  buildAt=performance.now(); dirty=true; fit();
+}
+function fit(){
+  W=wrapEl.clientWidth; H=wrapEl.clientHeight; dirty=true;
+  wrapEl.classList.toggle('compact',W<560);
+  if(!gl||!W||!H) return;
+  renderer.setSize(W,H,false); camera.aspect=W/H;
+  var tv=Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
+  var d=Math.max(7.6/(tv*camera.aspect),4.4/tv,9);
+  camera.position.set(0,1.0,d); camera.lookAt(0,0,0); camera.updateProjectionMatrix();
+}
+function hit(e){
+  var cv=renderer.domElement, r=cv.getBoundingClientRect();
+  ray.setFromCamera(new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1),camera);
+  var h=ray.intersectObjects(nodes.map(function(n){return n.mesh;}));
+  return h.length?h[0].object.userData.idx:-1;
+}
+function ease(x){x=Math.max(0,Math.min(1,x)); return 1-Math.pow(1-x,3);}
+function frame(now){
+  requestAnimationFrame(frame);
+  if(!gl||!visible||document.hidden) return;
+  if(reduced&&!dirty) return;
+  var dt=Math.min((now-lastT)/1000,0.05); lastT=now; dirty=false;
+  if(!drag&&!reduced) idleT+=dt;
+  var off=reduced?0:Math.sin(idleT*0.4)*0.28, k=reduced?1:Math.min(1,dt*7);
+  yaw+=(userYaw+off-yaw)*k; pitch+=(userPitch-pitch)*k;
+  root.rotation.y=yaw; root.rotation.x=pitch;
+  var since=now-buildAt, introDone=reduced||since>900;
+  nodes.forEach(function(n,i){
+    var s=reduced?1:ease((since-i*70)/420);
+    var pulse=(i===sel&&!reduced)?1+0.06*Math.sin(now/300):1;
+    n.g.scale.setScalar(Math.max(s,0.001)*pulse*(i===hover?1.08:1));
+    n.mat.emissiveIntensity=i===sel?0.6:(i===hover?0.35:0.15);
+  });
+  packets.forEach(function(p){
+    if(!reduced) p.t=(p.t+p.sp*dt)%1;
+    p.mesh.visible=introDone; p.mesh.position.copy(p.curve.getPoint(p.t));
+  });
+  root.updateMatrixWorld(true);
+  nodes.forEach(function(n){
+    n.g.getWorldPosition(v3); v3.y-=1.0; v3.project(camera);
+    n.el.style.transform='translate('+((v3.x*0.5+0.5)*W)+'px,'+((-v3.y*0.5+0.5)*H)+'px) translate(-50%,0)';
+    n.el.style.opacity=(reduced||since>300)?1:0;
+  });
+  renderer.render(scene,camera);
+}
+function init3d(){
+  wrapEl.classList.remove('loading');
+  try{
+    if(typeof THREE==='undefined') throw new Error('no three');
+    v3=new THREE.Vector3();
+    renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    wrapEl.insertBefore(renderer.domElement,labelsEl);
+    scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(38,1,0.1,100);
+    scene.add(new THREE.AmbientLight(0xffffff,0.8));
+    var dl=new THREE.DirectionalLight(0xffffff,0.85); dl.position.set(4,8,6); scene.add(dl);
+    root=new THREE.Group(); scene.add(root); ray=new THREE.Raycaster();
+    gl=true;
+  }catch(e){gl=false; wrapEl.classList.add('nogl'); return;}
+  var cv=renderer.domElement, lx=0, ly=0, moved=0;
+  cv.addEventListener('pointerdown',function(e){drag=true; lx=e.clientX; ly=e.clientY; moved=0; try{cv.setPointerCapture(e.pointerId);}catch(_){} cv.style.cursor='grabbing';});
+  cv.addEventListener('pointermove',function(e){
+    if(drag){
+      var dx=e.clientX-lx, dy=e.clientY-ly; lx=e.clientX; ly=e.clientY; moved+=Math.abs(dx)+Math.abs(dy);
+      userYaw+=dx*0.008; userPitch=Math.min(0.85,Math.max(-0.05,userPitch+dy*0.005)); dirty=true;
+    }else{
+      var h=hit(e); if(h!==hover){hover=h; cv.style.cursor=h>=0?'pointer':'grab'; dirty=true;}
+    }
+  });
+  cv.addEventListener('pointerup',function(e){
+    if(!drag) return; drag=false; cv.style.cursor='grab';
+    if(moved<6){var h=hit(e); if(h>=0) select(h);}
+  });
+  cv.addEventListener('pointercancel',function(){drag=false;});
+  cv.addEventListener('pointerleave',function(){if(!drag&&hover!==-1){hover=-1; dirty=true;}});
+  if('ResizeObserver' in window) new ResizeObserver(fit).observe(wrapEl); else addEventListener('resize',fit);
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){visible=en[0].isIntersecting; dirty=true;}).observe(wrapEl);
+  var rebuild=function(){build(cur);};
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rebuild);
+  new MutationObserver(rebuild).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  build(cur); requestAnimationFrame(frame);
+}
+function loadThree(){
+  var s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload=init3d; s.onerror=function(){wrapEl.classList.remove('loading'); wrapEl.classList.add('nogl');};
+  document.head.appendChild(s);
+}
+renderPanel();
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect(); loadThree();}},{rootMargin:'800px'});
+  io.observe(wrapEl);
+}else{loadThree();}
+
+Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'),function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copy);
+    function done(msg){b.textContent=msg; setTimeout(function(){b.textContent='Copy';},1600);}
+    function sel2(){var r=document.createRange(); r.selectNodeContents(t); var s=getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected');}
+    try{navigator.clipboard.writeText(t.textContent.trim()).then(function(){done('Copied');},sel2);}catch(e){sel2();}
+  });
+});
+})();
+</script>
+</body>
+</html>
