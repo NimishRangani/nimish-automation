@@ -11,7 +11,15 @@
 - Outreach with reply triage: n8n send and follow-up workflows, LLM reply classification, PostgreSQL log.
 - Content pipeline: LLM scripting, voiceover, Remotion video or FLUX and Whisper on Modal, automatic publishing.
 - Custom AI workflow: scoped build around a client's existing tools using the Claude API and n8n.
-- Price is set after a 30-minute call and a written scope.
+- Price is fixed after a 30-minute call and a written scope. See pricing below.
+
+## Pricing (NZD, GST added where it applies)
+- Custom AI workflow: from NZ$1,500
+- Outreach with reply triage: from NZ$2,500
+- Content pipeline: from NZ$3,000
+- Care plan: from NZ$300 per month
+- Ad-hoc changes: NZ$120 per hour
+- Full details: https://aiexpert.qd.je/pricing/
 
 ## Case studies (all built and run by Nimish Rangani)
 - Outreach that sorts its own replies: live for two businesses, LLM classifies replies as interested, not interested or referral, no manual triage.
@@ -21,6 +29,7 @@
 
 ## Pages
 - [Home](https://aiexpert.qd.je/): all content, case studies, services, FAQ and contact details.
+- [Pricing](https://aiexpert.qd.je/pricing/): package prices in NZD, what is and is not included, pricing FAQ.
 
 ## Contact
 - Email: nim_rangani@outlook.com
