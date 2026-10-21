@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://aiexpert.qd.je/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI automation that does the work. Nimish Rangani, Auckland, New Zealand.">
+<meta property="og:image:alt" content="AI Expert: AI automation that does the work. Auckland, New Zealand.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Automation Auckland | n8n and LLM Workflows">
 <meta name="twitter:description" content="n8n and LLM workflows for outreach, content and operations. Four live systems shown as 3D maps you can rotate.">
@@ -67,6 +67,7 @@
       "name": "Nimish Rangani Automation",
       "url": "https://aiexpert.qd.je/",
       "image": "https://aiexpert.qd.je/og.png",
+      "logo": "https://aiexpert.qd.je/logo-512.png",
       "description": "AI automation services in Auckland, New Zealand: n8n and LLM workflows for outreach, content production and internal operations.",
       "email": "nim_rangani@outlook.com",
       "telephone": "+64 22 104 1369",
@@ -148,7 +149,8 @@ a{color:var(--accent)}
 .eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
 
 header.top{display:flex; justify-content:space-between; align-items:center; gap:12px 24px; flex-wrap:wrap}
-header.top b{font-family:var(--font-display); font-size:18px}
+.brand{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg); font-family:var(--font-display); font-weight:700; font-size:22px; line-height:1}
+.brand i{font-style:normal; color:var(--accent)}
 header.top nav{display:flex; flex-wrap:wrap; gap:4px 18px}
 header.top nav a{font-size:14px; color:var(--fg); text-decoration:none; padding:6px 0}
 header.top nav a:hover{color:var(--accent); text-decoration:underline}
@@ -261,7 +263,15 @@ footer a{color:var(--muted)}
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
   <header class="top">
-    <b>Nimish Rangani</b>
+    <a class="brand" href="/" aria-label="AI Expert, home">
+      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="var(--accent)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 50 L32 13 L51 50"/><path d="M19.7 37 L44.3 37"/></g>
+        <circle cx="19.7" cy="37" r="3" fill="var(--accent)"/><circle cx="44.3" cy="37" r="3" fill="var(--accent)"/>
+        <circle cx="13" cy="50" r="5.6" fill="var(--accent)"/><circle cx="51" cy="50" r="5.6" fill="var(--accent)"/>
+        <circle cx="32" cy="13" r="6" fill="var(--packet)"/>
+      </svg>
+      <span><i>AI</i> Expert</span>
+    </a>
     <nav aria-label="Primary">
       <a href="#stage">Case studies</a>
       <a href="#offers">Services</a>
