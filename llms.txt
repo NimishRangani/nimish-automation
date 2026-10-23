@@ -33,6 +33,6 @@
 - [Blog](https://aiexpert.qd.je/blog/): practical guides on AI automation, n8n and LLM workflows for New Zealand businesses (new posts added regularly; RSS at https://aiexpert.qd.je/blog/feed.xml).
 
 ## Contact
-- Email: nim_rangani@outlook.com
+- Email: hello@aiexpert.qd.je
 - Phone: +64 22 104 1369
 - LinkedIn: https://www.linkedin.com/in/nimit369
