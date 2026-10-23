@@ -248,6 +248,47 @@ html.js .reveal.in{opacity:1; transform:none}
 .fbtns{display:flex; flex-wrap:wrap; gap:12px}
 .cform small{color:var(--muted); font-size:13px}
 @media (max-width:600px){.cform .row2{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- premium layer ---- */
+body::after{content:""; position:fixed; inset:0; z-index:35; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.btn.primary{background:linear-gradient(100deg,#3FC6C1,#7fe0c8); box-shadow:0 0 0 1px rgba(63,198,193,.5), 0 8px 30px -8px rgba(63,198,193,.55); transition:transform .25s, box-shadow .25s, filter .25s}
+.btn.primary:hover{transform:translateY(-2px); box-shadow:0 0 0 1px rgba(63,198,193,.7), 0 14px 40px -8px rgba(63,198,193,.7); filter:none}
+.btn:not(.primary){transition:border-color .25s, background .25s, transform .25s}
+.btn:not(.primary):hover{border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.05); filter:none}
+.spot{position:relative; isolation:isolate; transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s}
+.spot::before{content:""; position:absolute; inset:0; border-radius:inherit; z-index:-1; pointer-events:none; opacity:0; transition:opacity .35s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(63,198,193,.16), transparent 60%)}
+.spot:hover::before{opacity:1}
+.card.spot:hover{transform:translateY(-4px); border-color:rgba(63,198,193,.45)}
+.eyebrow::before{content:""; display:inline-block; width:22px; height:1px; background:var(--accent); vertical-align:middle; margin-right:10px}
+#hero .eyebrow::before{display:none}
+.hero-glow{position:absolute; inset:0; pointer-events:none; background:radial-gradient(60% 50% at 18% 55%, rgba(63,198,193,.10), transparent 70%), radial-gradient(40% 40% at 90% 10%, rgba(245,196,94,.06), transparent 70%)}
+
+#proof{background:linear-gradient(180deg,var(--bg),#081015 60%,var(--bg))}
+.proof-grid{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:28px; margin-top:48px; align-items:start}
+.frame{margin:0; border-radius:16px; background:#0B1116; border:1px solid rgba(255,255,255,.1); overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(63,198,193,.06), 0 30px 120px -40px rgba(63,198,193,.25);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s}
+.frame:hover{transform:translateY(-6px)}
+.frame .bar{display:flex; align-items:center; gap:7px; padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.02)}
+.frame .bar i{width:10px; height:10px; border-radius:50%; background:#2A3942}
+.frame .bar i:nth-child(1){background:#ff5f57} .frame .bar i:nth-child(2){background:#febc2e} .frame .bar i:nth-child(3){background:#28c840}
+.frame .bar span{margin-left:10px; font:11px var(--font-mono); color:var(--muted); background:rgba(255,255,255,.05); padding:3px 12px; border-radius:6px}
+.frame img{display:block; width:100%; height:auto}
+.shot-cap{margin:14px 4px 0; font-size:15px; color:var(--muted)}
+.shot-cap b{color:var(--fg); font-weight:600}
+.shot-cap a{color:var(--accent)}
+.proof-grid .col2{display:grid; gap:28px}
+
+.marquee{overflow:hidden; border-block:1px solid var(--line); background:var(--bg); position:relative; z-index:1; padding:20px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee .track{display:flex; gap:14px; width:max-content; animation:mq 38s linear infinite}
+.marquee span{font:500 13px var(--font-mono); letter-spacing:.04em; color:var(--muted); padding:8px 18px; border:1px solid var(--line); border-radius:999px; background:var(--bg2); white-space:nowrap}
+.marquee span b{color:var(--accent); font-weight:500; margin-right:8px}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee .track{animation:none; flex-wrap:wrap; width:auto; justify-content:center}}
+@media (max-width:900px){.proof-grid{grid-template-columns:minmax(0,1fr)} .frame:hover{transform:none}}
 </style></head>
 <body>
 <a class="skip" href="#contact">Skip to contact</a>
@@ -280,6 +321,7 @@ html.js .reveal.in{opacity:1; transform:none}
 
 <main>
   <section id="hero" class="pad" aria-labelledby="h1">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="inner" style="width:100%">
       <div class="copy">
         <div class="eyebrow">AI automation · n8n and LLM workflows · Auckland, NZ</div>
@@ -334,6 +376,30 @@ html.js .reveal.in{opacity:1; transform:none}
           </div>
         </article>
         <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Tools used"><div class="track" aria-hidden="true"><span><b>/</b>n8n</span><span><b>/</b>Claude API</span><span><b>/</b>PostgreSQL</span><span><b>/</b>Supabase</span><span><b>/</b>Modal</span><span><b>/</b>FLUX</span><span><b>/</b>Whisper</span><span><b>/</b>Remotion</span><span><b>/</b>TypeScript</span><span><b>/</b>Node.js</span><span><b>/</b>AWS Bedrock</span><span><b>/</b>Vercel</span><span><b>/</b>n8n</span><span><b>/</b>Claude API</span><span><b>/</b>PostgreSQL</span><span><b>/</b>Supabase</span><span><b>/</b>Modal</span><span><b>/</b>FLUX</span><span><b>/</b>Whisper</span><span><b>/</b>Remotion</span><span><b>/</b>TypeScript</span><span><b>/</b>Node.js</span><span><b>/</b>AWS Bedrock</span><span><b>/</b>Vercel</span></div></div>
+
+  <section id="proof" class="solid block pad" aria-labelledby="pf-h">
+    <div class="inner">
+      <div class="eyebrow reveal">In production</div>
+      <h2 class="big reveal" id="pf-h" style="max-width:20ch">Not mockups. A live product.</h2>
+      <p class="lead reveal" style="margin-top:18px; max-width:56ch">BanProof checks TikTok Shop and Amazon affiliate scripts against platform policy using the Claude API. I designed, built and run it. Below is the real product.</p>
+      <div class="proof-grid">
+        <figure class="reveal" style="margin:0">
+          <div class="frame"><div class="bar"><i></i><i></i><i></i><span>banproof.io</span></div>
+            <img src="/img/banproof-product.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="BanProof homepage: compliance platform for TikTok Shop and Amazon affiliates with a script audit tool"></div>
+          <figcaption class="shot-cap"><b>The product.</b> Script audit, video scan and appeal assistant in one dashboard.</figcaption>
+        </figure>
+        <div class="col2">
+          <figure class="reveal" style="margin:0">
+            <div class="frame"><div class="bar"><i></i><i></i><i></i><span>banproof.io / audit</span></div>
+              <img src="/img/banproof-audit.jpg" width="1500" height="669" loading="lazy" decoding="async" alt="BanProof script audit showing a high-risk result with flagged phrases and compliant rewrites"></div>
+            <figcaption class="shot-cap"><b>The result.</b> Each risky phrase is flagged and rewritten as a compliant alternative. <a href="https://banproof.io" target="_blank" rel="noopener">See it live</a>.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -393,17 +459,17 @@ html.js .reveal.in{opacity:1; transform:none}
       <div class="eyebrow reveal">Services</div>
       <h2 class="big reveal" id="sv-h">Pick a starting point.</h2>
       <div class="cards">
-        <article class="card reveal">
+        <article class="card spot reveal">
           <h3>Outreach with reply triage</h3>
           <p>Cold sequences that sort their own replies and route the follow-ups.</p>
           <ul><li>n8n send and follow-up workflows</li><li>LLM labels for every reply</li><li>A PostgreSQL log you can query</li></ul>
         </article>
-        <article class="card reveal">
+        <article class="card spot reveal">
           <h3>Content pipeline</h3>
           <p>Script, voice, image or video, then publish. Batches run without an operator.</p>
           <ul><li>LLM scripting and voiceover</li><li>Remotion video, or FLUX and Whisper on Modal</li><li>Auto-publishing to your platforms</li></ul>
         </article>
-        <article class="card reveal">
+        <article class="card spot reveal">
           <h3>Custom AI workflow</h3>
           <p>A scoped build around the tools your team already uses.</p>
           <ul><li>Claude API and n8n</li><li>Supabase or PostgreSQL where needed</li><li>Handover notes so you can run it</li></ul>
@@ -679,6 +745,10 @@ var f=document.getElementById('cf');
 if(f)f.addEventListener('submit',function(e){e.preventDefault();
   var d=new FormData(f), body='Name: '+d.get('name')+'\nEmail: '+d.get('email')+'\n\nTask I repeat most:\n'+d.get('task');
   location.href='mailto:'+a+'?subject='+encodeURIComponent(f.getAttribute('data-subject'))+'&body='+encodeURIComponent(body);
+});
+/* cursor spotlight on cards */
+Array.prototype.forEach.call(document.querySelectorAll('.spot'),function(el){
+  el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(); el.style.setProperty('--mx',(e.clientX-r.left)+'px'); el.style.setProperty('--my',(e.clientY-r.top)+'px');});
 });
 /* Blog link appears only once the blog has posts */
 fetch('/blog/posts.json').then(function(r){return r.ok?r.json():[];}).then(function(p){
