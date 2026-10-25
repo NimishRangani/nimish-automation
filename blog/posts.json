@@ -1,5 +1,21 @@
 [
   {
+    "slug": "automate-invoice-reminders-n8n",
+    "title": "How to automate invoice reminders in n8n",
+    "description": "Set up automatic payment reminder emails in n8n to reduce unpaid invoices and late payments without manual work.",
+    "category": "operations",
+    "date": "2026-10-25T19:00:25.756Z",
+    "readMinutes": 7,
+    "keywords": [
+      "automate invoice reminders",
+      "n8n invoice automation",
+      "payment reminder workflow",
+      "automate late payment reminders",
+      "invoice follow-up automation",
+      "n8n accounting automation"
+    ]
+  },
+  {
     "slug": "automate-cold-email-follow-ups-nz",
     "title": "How to automate cold email follow-ups in NZ",
     "description": "Set up automated follow-up sequences for cold emails in New Zealand without manual work. Learn the tools, compliance rules, and when to automate.",
