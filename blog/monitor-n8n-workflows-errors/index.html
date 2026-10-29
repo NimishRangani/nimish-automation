@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<title>How to monitor n8n workflows for errors | AI Expert</title>
+<meta name="description" content="Set up alerts and logging to catch n8n workflow failures early. Learn practical steps to monitor for errors before they impact your business.">
+<link rel="canonical" href="https://aiexpert.qd.je/blog/monitor-n8n-workflows-errors/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Nimish Rangani">
+<meta name="theme-color" content="#06090C">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="AI Expert blog" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
+<meta property="og:type" content="article"><meta property="og:site_name" content="AI Expert"><meta property="og:locale" content="en_NZ">
+<meta property="og:title" content="How to monitor n8n workflows for errors"><meta property="og:description" content="Set up alerts and logging to catch n8n workflow failures early. Learn practical steps to monitor for errors before they impact your business."><meta property="og:url" content="https://aiexpert.qd.je/blog/monitor-n8n-workflows-errors/">
+<meta property="og:image" content="https://aiexpert.qd.je/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-10-29T19:00:18.742Z"><meta property="article:author" content="Nimish Rangani">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to monitor n8n workflows for errors"><meta name="twitter:description" content="Set up alerts and logging to catch n8n workflow failures early. Learn practical steps to monitor for errors before they impact your business."><meta name="twitter:image" content="https://aiexpert.qd.je/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to monitor n8n workflows for errors","description":"Set up alerts and logging to catch n8n workflow failures early. Learn practical steps to monitor for errors before they impact your business.","datePublished":"2026-10-29T19:00:18.742Z","dateModified":"2026-10-29T19:00:18.742Z","inLanguage":"en-NZ","mainEntityOfPage":"https://aiexpert.qd.je/blog/monitor-n8n-workflows-errors/","image":"https://aiexpert.qd.je/og.png","author":{"@id":"https://aiexpert.qd.je/#person"},"publisher":{"@id":"https://aiexpert.qd.je/#business"},"keywords":"monitor n8n workflows for errors, n8n error alerts, n8n workflow logging, n8n execution monitoring, n8n workflow reliability, n8n error notifications"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aiexpert.qd.je/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://aiexpert.qd.je/blog/"},{"@type":"ListItem","position":3,"name":"How to monitor n8n workflows for errors","item":"https://aiexpert.qd.je/blog/monitor-n8n-workflows-errors/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How often should I check my workflow logs?","acceptedAnswer":{"@type":"Answer","text":"If you have error alerts set up, you do not need to check logs daily unless errors are frequent. Start by checking weekly. If you see a pattern of errors, investigate the root cause and fix it rather than just monitoring the symptoms."}},{"@type":"Question","name":"Can I monitor workflows that run on a schedule?","acceptedAnswer":{"@type":"Answer","text":"Yes. Scheduled workflows are often the best candidates for monitoring because they run unattended. Set up alerts so you know immediately if a scheduled run fails."}},{"@type":"Question","name":"What if my workflow fails but the error message is not helpful?","acceptedAnswer":{"@type":"Answer","text":"Add logging to the nodes before the failure point so you can see what data was being processed. This usually reveals the root cause. If the error is from an external API, check that API's documentation or status page."}}]}</script>
+<style>:root{--bg:#06090C;--bg2:#0C1318;--fg:#F2F6F8;--muted:#98A8B2;--line:#1E2B33;--accent:#3FC6C1;--amber:#F5C45E;--font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--font-body:'Schibsted Grotesk','Segoe UI',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--accent)}.pad{padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}.inner{max-width:1180px;margin:0 auto}
+.eyebrow{font:500 12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#06161A;padding:8px 14px;border-radius:6px;z-index:50}.skip:focus{left:16px}
+nav.top{position:fixed;top:0;left:0;right:0;z-index:30;background:rgba(6,9,12,.72);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line)}
+nav.top .row{height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--fg);font:700 19px var(--font-display);line-height:1}.brand i{font-style:normal;color:var(--accent)}
+.links{display:flex;gap:26px}.links a{font-size:13px;color:var(--muted);text-decoration:none}.links a:hover,.links a[aria-current]{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;font:600 15px var(--font-body);text-decoration:none;border:1px solid rgba(255,255,255,.22);color:var(--fg)}
+.btn.primary{background:var(--accent);color:#06161A;border-color:var(--accent)}.btn.sm{min-height:34px;padding:0 16px;font-size:13px}.btn:hover{filter:brightness(1.12)}
+.hero{padding-top:clamp(112px,14vw,160px);padding-bottom:clamp(28px,4vw,48px);background:radial-gradient(ellipse at 70% 0%,#10252A,var(--bg) 65%)}
+h1{font:700 clamp(2.1rem,5.6vw,3.8rem)/1.05 var(--font-display);letter-spacing:-.03em;margin:12px 0 16px;max-width:22ch;text-wrap:balance}
+.lead{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;margin:0}.meta{font:13px var(--font-mono);color:var(--muted);margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.crumbs{font:12px var(--font-mono);color:var(--muted)}.crumbs a{color:var(--muted)}
+article.post{max-width:720px;margin:0 auto;padding-block:clamp(32px,5vw,60px)}
+article.post h2{font:700 clamp(1.5rem,3vw,2rem)/1.15 var(--font-display);letter-spacing:-.02em;margin:2.2em 0 .5em}
+article.post p{margin:0 0 1.1em}article.post ul,article.post ol{margin:0 0 1.2em;padding-left:1.3em}article.post li{margin:.35em 0}
+article.post code{font:.88em var(--font-mono);background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.faq{margin-top:2.6em;padding-top:1.2em;border-top:1px solid var(--line)}.faq h3{font:700 1.2rem/1.25 var(--font-display);margin:1.4em 0 .3em}.faq p{color:var(--muted);margin:0}
+.cta{margin-top:3em;padding:28px;border:1px solid var(--line);border-radius:20px;background:radial-gradient(ellipse at 50% 0%,#10252A,var(--bg2) 75%)}
+.cta h2{margin:0 0 8px!important;font:700 1.6rem/1.15 var(--font-display)}.cta p{color:var(--muted)}.cta .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.byline{margin-top:2.4em;font-size:15px;color:var(--muted)}
+.related{background:var(--bg2);padding-block:clamp(48px,7vw,90px)}.related h2{font:700 clamp(1.5rem,3.4vw,2.2rem) var(--font-display);margin:10px 0 24px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:var(--fg)}.card:hover{border-color:var(--accent)}
+.card h3{font:700 1.2rem/1.2 var(--font-display);margin:0}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}.card .m{font:12px var(--font-mono);color:var(--muted);margin-top:auto}
+.empty{padding:40px 0;color:var(--muted)}
+footer{padding-block:30px 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}footer .inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}footer a{color:var(--muted)}
+@media(max-width:900px){.links{display:none}.cards{grid-template-columns:minmax(0,1fr)}}</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="top pad" aria-label="Primary"><div class="inner row">
+<a class="brand" href="/" aria-label="AI Expert, home"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false"><g fill="none" stroke="#3FC6C1" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 50 L32 13 L51 50"/><path d="M19.7 37 L44.3 37"/></g><circle cx="19.7" cy="37" r="3" fill="#3FC6C1"/><circle cx="44.3" cy="37" r="3" fill="#3FC6C1"/><circle cx="13" cy="50" r="5.6" fill="#3FC6C1"/><circle cx="51" cy="50" r="5.6" fill="#3FC6C1"/><circle cx="32" cy="13" r="6" fill="#F5C45E"/></svg><span><i>AI</i> Expert</span></a>
+<div class="links"><a href="/#systems">Systems</a><a href="/#services">Services</a><a href="/pricing/">Pricing</a><a href="/blog/" aria-current="page">Blog</a><a href="/#contact">Contact</a></div>
+<a class="btn primary sm" href="/#contact">Start a project</a></div></nav>
+<main id="main">
+<header class="hero pad"><div class="inner"><div class="crumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a></div><div class="eyebrow" style="margin-top:14px">Reliability</div><h1>How to monitor n8n workflows for errors</h1><p class="lead">When you automate a business process with n8n, you hand over a repetitive task to software. That's the win. But if the workflow breaks silently, you won't know until a customer complains or revenue stops flowing.</p><div class="meta"><span>Nimish Rangani</span><span>30 October 2026</span><span>6 min read</span></div></div></header>
+<div class="pad"><article class="post">
+<p>Monitoring your workflows means catching errors before they become problems. This guide covers the practical steps to set up alerts, logs and checks so you know what is happening inside your automation.</p>
+<h2>Why workflow monitoring matters</h2>
+<p>A workflow that runs unattended can fail for many reasons: an API goes down, a database connection drops, a third-party service changes its response format, or a credential expires. Without monitoring, these failures go unnoticed.</p>
+<p>The cost of a silent failure is often higher than the cost of setting up alerts. A broken invoice reminder workflow means unpaid invoices. A broken lead intake workflow means lost sales. A broken data sync means decisions made on stale information.</p>
+<p>Monitoring is not about perfection. It is about knowing when something breaks so you can fix it fast.</p>
+<h2>Use n8n's built-in execution history</h2>
+<p>Every workflow execution in n8n is logged. You can see which runs succeeded, which failed, and why.</p>
+<p>To check execution history:</p>
+<ol><li>Open your workflow in n8n.</li><li>Click the 'Executions' tab at the top.</li><li>You will see a list of all runs, with status (success or error), timestamp, and duration.</li><li>Click any execution to see the full details, including which node failed and what error message it returned.</li></ol>
+<p>This is your first line of defence. If a workflow fails, the evidence is here. But checking manually every day is not realistic. You need alerts.</p>
+<h2>Set up error notifications</h2>
+<p>n8n can send you a message when a workflow fails. The most common methods are email and Slack.</p>
+<p>To set up email alerts:</p>
+<ol><li>Open your workflow.</li><li>Click the 'Settings' button (gear icon).</li><li>Scroll to 'Error workflow'.</li><li>Select 'On error' to trigger an error handler.</li><li>Add a node to send an email (use the 'Send Email' node or a service like SendGrid).</li><li>Configure the email to include the workflow name, error message, and a link to the execution.</li></ol>
+<p>To set up Slack alerts:</p>
+<ol><li>Follow the same steps but add a 'Slack' node instead of email.</li><li>Choose the channel where alerts should land.</li><li>Include the workflow name and error details in the message so your team knows what broke.</li></ol>
+<p>The key is to make the alert useful. Include the error message, the workflow name, and ideally a link to the execution so someone can investigate quickly. A vague alert that says 'something failed' will be ignored.</p>
+<h2>Add logging to understand what went wrong</h2>
+<p>Error notifications tell you that something broke. Logging tells you why.</p>
+<p>n8n lets you log data at each step of your workflow using the 'Execute Command' node or by adding a 'Log' node (available in n8n Cloud and self-hosted).</p>
+<p>Best practices for logging:</p>
+<ul><li>Log the input and output of critical nodes so you can trace data through the workflow.</li><li>Log when a condition is met or not met (for example, 'Customer found in database' or 'Customer not found').</li><li>Log API responses, especially error codes and messages.</li><li>Use clear labels so the log is easy to read: 'Step 1: Fetching customer', 'Step 2: Validating email', and so on.</li></ul>
+<p>When a workflow fails, you can then look at the logs to see exactly where it broke and what data was being processed. This turns a vague error into a solvable problem.</p>
+<h2>Monitor workflow health over time</h2>
+<p>One-off alerts are useful, but trends matter too. If a workflow fails once a week, that is a pattern worth investigating.</p>
+<p>n8n does not have built-in dashboards for long-term trends, but you can export execution data to a database or spreadsheet for analysis.</p>
+<p>Simple approach:</p>
+<ul><li>Run a separate workflow once a day that queries your main workflow's execution history.</li><li>Store the results in a database or Google Sheet.</li><li>Track: total runs, success rate, average duration, and error types.</li><li>Review weekly to spot patterns.</li></ul>
+<p>For example, if your workflow always fails between 2 and 3 a.m., that might point to a scheduled maintenance window at one of your API providers. If it fails randomly, the cause is less obvious and needs investigation.</p>
+<p>This level of monitoring is worth doing if your workflow is critical to your business. If it is a nice-to-have, manual checks of the execution history are enough.</p>
+<h2>When monitoring is worth the effort (and when it is not)</h2>
+<p>Monitoring takes time to set up and maintain. It is not always the right choice.</p>
+<p>Monitoring is a good fit if:</p>
+<ul><li>The workflow runs unattended on a schedule (daily, hourly, or on a trigger).</li><li>The workflow processes data that affects revenue, customer experience or compliance.</li><li>The workflow runs frequently enough that a silent failure would be noticed only after hours or days.</li><li>Your team is small and cannot manually check logs every morning.</li></ul>
+<p>Monitoring is probably not worth it if:</p>
+<ul><li>The workflow is triggered manually by a user who will immediately see if it fails.</li><li>The workflow is a one-off test or proof of concept.</li><li>The workflow is low-risk (for example, a nice-to-have report that is not acted on).</li><li>You have only a handful of workflows and can afford to check them manually.</li></ul>
+<p>Be honest about what you actually need. Over-engineering monitoring for a low-stakes workflow wastes time. Under-engineering it for a critical one creates risk.</p>
+<h2>Practical next steps</h2>
+<p>Start small and build from there.</p>
+<ol><li>Identify your most critical workflow, the one that, if it broke, would hurt your business.</li><li>Set up an error notification (email or Slack) so you know immediately if it fails.</li><li>Add logging to the workflow so you can debug failures quickly.</li><li>Check the execution history once a week for the first month to get a feel for how often errors occur.</li><li>If errors are rare, you are done. If they are frequent, investigate the root cause or add more monitoring.</li></ol>
+<p>Once you have one workflow monitored well, apply the same pattern to your other workflows. The effort compounds, but the payoff is peace of mind: you will know when something breaks, and you will have the information you need to fix it fast.</p>
+<section class="faq" aria-labelledby="faq-h"><h2 id="faq-h">Common questions</h2><h3>How often should I check my workflow logs?</h3><p>If you have error alerts set up, you do not need to check logs daily unless errors are frequent. Start by checking weekly. If you see a pattern of errors, investigate the root cause and fix it rather than just monitoring the symptoms.</p><h3>Can I monitor workflows that run on a schedule?</h3><p>Yes. Scheduled workflows are often the best candidates for monitoring because they run unattended. Set up alerts so you know immediately if a scheduled run fails.</p><h3>What if my workflow fails but the error message is not helpful?</h3><p>Add logging to the nodes before the failure point so you can see what data was being processed. This usually reveals the root cause. If the error is from an external API, check that API's documentation or status page.</p></section>
+<aside class="cta" aria-label="Work with AI Expert"><h2>Want this built for you?</h2><p>I build n8n and LLM workflows for outreach, content and operations. Prices start from NZ$1,500, with a fixed quote after a 30-minute call.</p><div class="row"><a class="btn primary" href="/#contact">Start a project</a><a class="btn" href="/pricing/">See pricing</a></div></aside>
+<p class="byline">Written by Nimish Rangani, an AI automation engineer in Auckland, New Zealand.</p>
+</article></div>
+<section class="related pad" aria-labelledby="rel-h"><div class="inner"><div class="eyebrow">Keep reading</div><h2 id="rel-h">More from the blog</h2><div class="cards"><a class="card" href="/blog/n8n-automation-cost-small-business-nz/"><div class="eyebrow">Costs</div><h3>How much does n8n automation cost for small business?</h3><p>n8n automation cost for small business: platform pricing, setup, and whether the investment makes sense for your operation.</p><div class="m">28 October 2026 · 6 min read</div></a><a class="card" href="/blog/automate-invoice-reminders-n8n/"><div class="eyebrow">Operations</div><h3>How to automate invoice reminders in n8n</h3><p>Set up automatic payment reminder emails in n8n to reduce unpaid invoices and late payments without manual work.</p><div class="m">26 October 2026 · 7 min read</div></a><a class="card" href="/blog/automate-cold-email-follow-ups-nz/"><div class="eyebrow">Outreach</div><h3>How to automate cold email follow-ups in NZ</h3><p>Set up automated follow-up sequences for cold emails in New Zealand without manual work. Learn the tools, compliance rules, and when to automate.</p><div class="m">23 October 2026 · 7 min read</div></a></div></div></section>
+</main>
+<footer class="pad"><div class="inner"><span>© 2026 AI Expert · Auckland, New Zealand</span><span><a href="/">Home</a> · <a href="/pricing/">Pricing</a> · <a href="/blog/">Blog</a> · <a href="/privacy/">Privacy</a> · <a href="/blog/feed.xml">RSS</a> · <a href="/llms.txt">llms.txt</a> · No cookies, no analytics</span></div></footer>
+</body>
+</html>
